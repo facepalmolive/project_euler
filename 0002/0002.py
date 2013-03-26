@@ -9,7 +9,17 @@ terms. By starting with 1 and 2, the first 10 terms will be:
   1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 
   By considering the terms in the Fibonacci sequence whose values do not exceed
-  four million, find the sum of the even-valued terms.
+four million, find the sum of the even-valued terms.
+
+---
+
+Intuition:
+
+- We can generate new Fibonaccis iteratively by only keeping track of the last
+two Fibonacci numbers.
+- Note that Fibonaccis follow an (odd, odd, even) repeating pattern (since
+odd + odd = even and odd + even = odd), so we only care about every third
+Fibonacci.
 """
 
 N = 4000000
@@ -18,15 +28,13 @@ def next_even_fib(first, second):
   """
   Given the first and second seed Fibonacci numbers in the series, yield the
   next even Fibonacci number.
-
-  Note that Fibonacci numbers follow an (odd, odd, even) pattern, so we want
-  every 3rd Fibonacci number.
   """
   prev, current = first, second
 
   while current < N:
     yield current
 
+    # only care about every 3rd Fibonacci
     for i in range(3):
       next = prev + current
       prev = current

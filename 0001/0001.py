@@ -7,6 +7,14 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we
 get 3, 5, 6 and 9. The sum of these multiples is 23.
 
 Find the sum of all the multiples of 3 or 5 below 1000.
+
+---
+
+Intuition:
+
+- We use the formula 1 + 2 + 3 + ... + a = a * (a + 1) / 2.
+- Every, e.g., 3 numbers just means 3 * (1 + 2 + ... + int(1000/3)).
+- Note that we've counted multiples of 15 twice, so we subtract it in the end.
 """
 
 N = 1000
