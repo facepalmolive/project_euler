@@ -59,31 +59,30 @@ def main(argv=None):
   if argv is None:
     argv = sys.argv
 
-  # the current, "largest" prime we know about so far
+  # the current, "largest" prime we've seen so far
   p = 2
 
   # list of prime numbers that we build incrementally
   primes = [p]
-
-  # largest prime factor of N we've seen so far
-  largest_prime_factor = 1
 
   # The target number that we're trying to factor. This gets continuously
   # whittled down because if p | N (i.e., N = mp), then any additional factors
   # must be found in m
   target = N
 
-  # We keep finding primes and adding them to the list.
-  # We can stop when target < biggest prime in list, because we've guaranteed
-  # to have divided out any smaller prime factors in earlier iterations
-  while target > p:
-    p = find_next_prime(primes)
-    primes.append(p)
+  # the largest prime factor of N that we've seen so far
+  largest_prime_factor = 1
 
+  # Keep finding primes, adding them to list, and seeing if they're a factor
+  while target >= p:
     # Divide out as many p's out of target as possible
     while target % p == 0:
       largest_prime_factor = p
       target /= p
+
+    p = find_next_prime(primes)
+    primes.append(p)
+
 
   print largest_prime_factor
 
